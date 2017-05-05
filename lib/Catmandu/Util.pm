@@ -770,7 +770,53 @@ Takes a data path, atmomizes it and separates the deepest key.
     print @atom_path;    # my very deep
     print $deepest_path; # path
 
-=back=head2 IO functions
+=item get_data($data, $key)
+
+If key exists in data, the value for this key is returned.
+
+    my $value    = get_data($data, 'mykey');
+    my @elements = get_data(@data, '*');
+    my $first    = get_data(@data, '$first');
+    my $last     = get_data(@data, '$last');
+
+=item set_data($data, $key, $val1, $val2, ...)
+
+If the key exists in data, the value for this key gets set. 
+If the key does not exist, the key gets added to data with value.
+The function returns the value wich have been set/added.
+
+    my $data = {foo => 'bar'};
+    my @data = ('foo', 'bar');
+    
+    set_data($data 'foo', 'baz');
+    print $data->{foo}; # baz
+    
+    set_data($data, 'bang', 'boom');
+    print $data->{bang}; # boom
+    
+    set_data(@data, '$first', 'boom');
+    print @data; # boom bar
+    
+    set_data(@data, '$last', 'bang');
+    print @data; # boom bang
+    
+    set_data(@data, '$prepend', 'batman');
+    print @data; # batman boom bang
+    
+    set_data(@data, '$append', 'robin');
+    print @data; # batman boom bang robin
+    
+    set_data(@data, '1', 'pow');
+    print @data; # batman boom pow bang robin
+    
+    set_data(@data, '*', 'so', 'childish');
+    print @data; # so childish
+    
+
+
+=back
+
+=head2 IO functions
 
     use Catmandu::Util qw(:io);
 
