@@ -755,7 +755,22 @@ Catmandu::Util - A collection of utility functions
 
 =head1 FUNCTIONS
 
-=head2 IO functions
+=head2 Data functions
+
+    use Catmandu::Util qw(:data);
+
+=over 4
+
+=item parse_data_path($path)
+
+Takes a data path, atmomizes it and separates the deepest key.
+
+    my (@atom_path, $deepest_key) = parse_data_path('my.very.deep.path');
+    
+    print @atom_path;    # my very deep
+    print $deepest_path; # path
+
+=back=head2 IO functions
 
     use Catmandu::Util qw(:io);
 
